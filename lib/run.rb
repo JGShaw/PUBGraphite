@@ -6,8 +6,10 @@ def match_metric(participant, stat_name, stat, time)
 end
 
 api_key = ARGV[0].dup
-shard = ARGV[1].dup
-player_names = ARGV[2].dup
+graphite_ip = ARGV[1]
+graphite_port = ARGV[2]
+shard = ARGV[3].dup
+player_names = ARGV[4].dup
 
 past_matches = {}
 
@@ -23,7 +25,6 @@ while true do
    
     unless past_matches[player.name] == latest_match_id
       if !matches.key?(latest_match_id)
-        puts latest_match_id
         latest_match = rubg_client.match(shard: shard, query_params: {match_id: latest_match_id})
         matches[latest_match_id] = latest_match
         past_matches[player.name]  = latest_match.match_id
@@ -51,6 +52,11 @@ while true do
     end
   end
 
-  puts metrics
+  socket = TCPSocket.new(graphite_ip, graphite_port)
+  metrics.each do |metric|
+    socket.puts metric
+  end
+  socket.close
+
   sleep 120
 end
