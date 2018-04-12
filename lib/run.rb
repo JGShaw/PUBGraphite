@@ -27,10 +27,10 @@ while true do
       if !matches.key?(latest_match_id)
         latest_match = rubg_client.match(shard: shard, query_params: {match_id: latest_match_id})
         matches[latest_match_id] = latest_match
-        past_matches[player.name]  = latest_match.match_id
       else
         latest_match = matches[latest_match_id]
       end
+      past_matches[player.name]  = latest_match.match_id
 
       # Process the latest match
       time = Time.parse(latest_match.created).to_i 
@@ -51,6 +51,8 @@ while true do
       metrics << match_metric(participant, "walk_distance", participant.walk_distance, time)
     end
   end
+
+  puts metrics
 
   socket = TCPSocket.new(graphite_ip, graphite_port)
   metrics.each do |metric|
