@@ -49,6 +49,12 @@ while true do
       metrics << match_metric(participant, "time_survived", participant.time_survived, time)
       metrics << match_metric(participant, "vehicle_destroys", participant.vehicle_destroys, time)
       metrics << match_metric(participant, "walk_distance", participant.walk_distance, time)
+
+      metrics << match_metric(participant, "number_of_teams", latest_match.rosters.length, time)
+      
+      player_roster = latest_match.rosters.find { |roster| roster.participants.member?(participant) }
+      metrics << match_metric(participant, 'rank', player_roster.rank, time)
+
     end
   end
 
