@@ -1,9 +1,6 @@
 require 'rubg'
 require 'socket'
 
-def match_metric(participant, stat_name, stat, time)
-  "PUBG.#{ participant.name }.matches.#{ stat_name } #{ stat } #{ time }"
-end
 
 api_key = ARGV[0].dup
 graphite_ip = ARGV[1]
@@ -35,8 +32,7 @@ while true do
       # Process the latest match
       time = Time.parse(latest_match.created).to_i 
       participant = latest_match.participants.select { |participant| participant.player_id == player.player_id}.first
-      metrics << match_metric(participant, "dbnos", participant.dbnos, time)
-      metrics << match_metric(participant, "kills", participant.kills, time)
+      
       metrics << match_metric(participant, "assists", participant.assists, time)
       metrics << match_metric(participant, "boosts", participant.boosts, time)
       metrics << match_metric(participant, "damage_dealt", participant.damage_dealt, time)
