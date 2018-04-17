@@ -5,6 +5,7 @@ describe MetricExtractor do
   let (:player) { double }
   let (:participant) { double }
   let (:match) { double }
+  let (:rosters) { double }
   
   before do
     allow(participant).to receive(:name).and_return("shroud")
@@ -22,8 +23,10 @@ describe MetricExtractor do
     allow(participant).to receive(:time_survived).and_return(12)
     allow(participant).to receive(:vehicle_destroys).and_return(13)
     allow(participant).to receive(:walk_distance).and_return(14)
+
+    allow(match).to receive(:rosters).and_return((1..15).to_a)
     
-      allow(match).to receive(:created).and_return("2018-04-17T12:32:33+00:00")
+    allow(match).to receive(:created).and_return("2018-04-17T12:32:33+00:00")
     @metrics = subject.extract(player, participant, match)
   end
 
@@ -83,15 +86,10 @@ describe MetricExtractor do
     it 'gets the walk_distance' do
       expect(@metrics).to include("PUBG.shroud.matches.walk_distance 14 1523968353")
     end
+    
+    it 'gets the number_of_teams' do
+      expect(@metrics).to include("PUBG.shroud.matches.number_of_teams 15 1523968353")
+    end
   end
 
-      # metrics << match_metric(participant, "headshot_kills", participant.headshot_kills, time)
-      # metrics << match_metric(participant, "heals", participant.heals, time)
-      # metrics << match_metric(participant, "longest_kill", participant.longest_kill, time)
-      # metrics << match_metric(participant, "revives", participant.revives, time)
-      # metrics << match_metric(participant, "ride_distance", participant.ride_distance, time)
-      # metrics << match_metric(participant, "road_kills", participant.road_kills, time)
-      # metrics << match_metric(participant, "time_survived", participant.time_survived, time)
-      # metrics << match_metric(participant, "vehicle_destroys", participant.vehicle_destroys, time)
-      # metrics << match_metric(participant, "walk_distance", participant.walk_distance, time)
 end

@@ -16,6 +16,10 @@ module MetricExtractor
     metrics << match_metric(participant, "time_survived", participant.time_survived, time)
     metrics << match_metric(participant, "vehicle_destroys", participant.vehicle_destroys, time)
     metrics << match_metric(participant, "walk_distance", participant.walk_distance, time)
+      
+    
+    metrics << match_metric(participant, "number_of_teams", match.rosters.length, time)
+    
     metrics
   end
 
