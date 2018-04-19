@@ -5,7 +5,8 @@ describe MetricExtractor do
   let (:player) { double }
   let (:participant) { double.as_null_object }
   let (:match) { double.as_null_object }
-  let (:rosters) { double }
+  let (:rosters) { double.as_null_object }
+  let (:roster) { double.as_null_object }
   
   before do
     allow(participant).to receive(:name).and_return("shroud")
@@ -98,10 +99,21 @@ describe MetricExtractor do
     end
     
     it 'gets the number_of_teams' do
-      allow(match).to receive(:rosters).and_return((1..15).to_a)
+      allow(match).to receive(:rosters).and_return(rosters)
+      allow(rosters).to receive(:length).and_return(15)
       metrics = subject.extract(player, participant, match)
       expect(metrics).to include("PUBG.shroud.matches.number_of_teams 15 1523968353")
     end
+
+    it 'gets the rank' do 
+      allow(match).to receive(:rosters).and_return(rosters)
+      allow(rosters).to receive(:find).and_return(roster)
+      allow(roster).to receive(:rank).and_return(16)
+       
+      metrics = subject.extract(player, participant, match)
+      expect(metrics).to include("PUBG.shroud.matches.rank 16 1523968353") 
+    end
+
   end
 
 end
