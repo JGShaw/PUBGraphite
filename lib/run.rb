@@ -30,14 +30,9 @@ while true do
       past_matches[player.name]  = latest_match.match_id
 
       # Process the latest match
-      participant = latest_match.participants.select { |participant| participant.player_id == player.player_id}.first
+      participant = latest_match.participants.select { |participant| participant.player_id == player.player_id }.first
       
       metrics = MetricExtractor.extract(player, participant, latest_match)  
-
-      # player_roster = latest_match.rosters.find { |roster| roster.participants.member?(participant) }
-      # time = Time.parse(latest_match.created).to_i 
-      # metrics << match_metric(participant, 'rank', player_roster.rank, time)
-
     end
   end
 
