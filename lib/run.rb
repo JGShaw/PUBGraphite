@@ -1,6 +1,6 @@
 require 'rubg'
 require 'socket'
-
+require_relative 'metric_extractor'
 
 api_key = ARGV[0].dup
 graphite_ip = ARGV[1]
@@ -31,9 +31,12 @@ while true do
 
       # Process the latest match
       participant = latest_match.participants.select { |participant| participant.player_id == player.player_id}.first
-       
-      player_roster = latest_match.rosters.find { |roster| roster.participants.member?(participant) }
-      metrics << match_metric(participant, 'rank', player_roster.rank, time)
+      
+      metrics = MetricExtractor.extract(player, participant, latest_match)  
+
+      # player_roster = latest_match.rosters.find { |roster| roster.participants.member?(participant) }
+      # time = Time.parse(latest_match.created).to_i 
+      # metrics << match_metric(participant, 'rank', player_roster.rank, time)
 
     end
   end
