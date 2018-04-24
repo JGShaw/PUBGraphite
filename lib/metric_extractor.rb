@@ -1,6 +1,15 @@
-# frozen_string_literal: true
+require 'rubg'
 
-module MetricExtractor
+class MetricExtractor
+
+  def initialize(api_key)
+    @client = RUBG.new(api_key: api_key)
+  end
+
+  def players(shard, player_names)
+    @client.players(shard: shard, query_params: { player_names: player_names })
+  end
+
   def self.extract(_player, participant, match)
     time = Time.parse(match.created).to_i
     metrics = []

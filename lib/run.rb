@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rubg'
 require 'socket'
 require_relative 'metric_extractor'
@@ -12,7 +10,6 @@ player_names = ARGV[4].dup
 
 past_matches = {}
 
-rubg_client = RUBG.new(api_key: api_key)
 
 loop do
   matches = {}
