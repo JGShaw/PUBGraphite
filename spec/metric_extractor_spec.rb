@@ -18,7 +18,7 @@ describe MetricExtractor do
     end
   end
 
-  context '#players' do  
+  describe '#players' do  
     it 'gets the correct players' do
       VCR.use_cassette('shroud_Wadu') do
         players = subject.players('pc-na', 'shroud,Wadu').players
@@ -29,8 +29,7 @@ describe MetricExtractor do
     end
   end
 
-  context '#extract' do     
-
+  describe '#extract' do
     before do
       VCR.use_cassette('shroud_match_0') do
         @first_match = subject.match('pc-na', @shroud, 0)
@@ -58,21 +57,73 @@ describe MetricExtractor do
         end
       end
      
+      it 'returns the assists metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.assists 0 1524544931')
+      end
+      
+      it 'returns the boosts metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.boosts 0 1524544931')
+      end
+      
+      it 'returns the damage_dealt metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.damage_dealt 500 1524544931')
+      end
+      
       it 'returns the dbnos metric' do
           expect(@metrics).to include('PUBG.shroud.matches.dbnos 3 1524544931')
+      end
+      
+      it 'returns the headshot_kills metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.headshot_kills 2 1524544931')
+      end
+      
+      it 'returns the heals metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.heals 0 1524544931')
       end
       
       it 'returns the kills metric' do
           expect(@metrics).to include('PUBG.shroud.matches.kills 5 1524544931')
       end
       
-      it 'returns the assists metric' do
-          expect(@metrics).to include('PUBG.shroud.matches.assists 0 1524544931')
+      it 'returns the longest_kill metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.longest_kill 33 1524544931')
+      end
+    
+      it 'returns the number_of_teams metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.number_of_teams 49 1524544931')
+      end
+
+      it 'returns the rank metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.rank 40 1524544931')
+      end
+      
+      it 'returns the revives metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.revives 0 1524544931')
+      end
+      
+      it 'returns the ride_distance metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.ride_distance 0 1524544931')
+      end
+      
+      it 'returns the road_kills metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.road_kills 0 1524544931')
+      end
+      
+      it 'returns the time_survived metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.time_survived 159 1524544931')
+      end
+      
+      it 'returns the vehicle_destroys metric' do
+          expect(@metrics).to include('PUBG.shroud.matches.vehicle_destroys 0 1524544931')
+      end
+      
+      it 'returns the walk_distance metric' do
+        expect(@metrics).to include('PUBG.shroud.matches.walk_distance 89.03397 1524544931')
       end
     end
   end
   
-  context '#match' do
+  describe '#match' do
     it 'can get the first match' do
       VCR.use_cassette('shroud_match_0') do
         match = subject.match('pc-na', @shroud, 0)
