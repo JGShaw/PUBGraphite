@@ -19,13 +19,11 @@ loop do
     metrics.concat extractor.extract(shard, player)
   end
 
-  puts metrics
-
-  # socket = TCPSocket.new(graphite_ip, graphite_port)
-  # metrics.each do |metric|
-    # socket.puts metric
-  # end
-  # socket.close
+  socket = TCPSocket.new(graphite_ip, graphite_port)
+  metrics.each do |metric|
+    socket.puts metric
+  end
+  socket.close
 
   sleep 120
 end
