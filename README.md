@@ -32,4 +32,4 @@ PUBG.shroud.matches.walk_distance 89.03397 1524544931
 ```
 
 ## Running the tests
-The tests are written using Rspec, and use [VCR](https://github.com/vcr/vcr) to record and save the HTTP interactions between the RUBG gem and the PUBG API. The cassettes are located in `spec/cassettes`. If new recordings are required then delete the files in this folder, and update the values expected in the tests for all of the metrics.
+The tests are written using Rspec, and use [VCR](https://github.com/vcr/vcr) to record and save the HTTP interactions between the RUBG gem and the PUBG API. The cassettes are located in `spec/cassettes`. If new recordings are required then delete the files in this folder, and update the values expected in the tests for all of the metrics. When creating new cassettes you will need to set an environment variable `PUBG_API_KEY` containing a valid API key, this key will not be stored in the cassettes.
