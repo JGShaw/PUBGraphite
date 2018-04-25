@@ -10,3 +10,7 @@ ruby lib/run.rb <<YOUR API KEY>> <<GRAPHITE IP>> <<GRAPHITE PORT>> <<SHARD>> <<P
 The shard is the region you wish to query, please check the PUBG api for a list of [available regions](https://documentation.playbattlegrounds.com/en/making-requests.html#regions).
 
 The player names should be seperated by commas with no spaces, e.g. `shroud,wadu,...`. These names are case sensitive.
+
+
+## Running the tests
+The tests are written using Rspec, and use [VCR](https://github.com/vcr/vcr) to record and save the HTTP interactions between the RUBG gem and the PUBG API. The cassettes are located in `spec/cassettes`. If new recordings are required then delete the files in this folder, and update the values expected in the tests for all of the metrics.
