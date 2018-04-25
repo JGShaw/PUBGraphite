@@ -10,7 +10,7 @@ class MetricExtractor
   end
 
   def players(shard, player_names)
-    @client.players(shard: shard, query_params: { player_names: player_names })
+    @client.players(shard: shard, query_params: { player_names: player_names }).players
   end
 
   def extract(shard, player)

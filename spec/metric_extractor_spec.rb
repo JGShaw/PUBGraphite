@@ -14,14 +14,14 @@ describe MetricExtractor do
     end
     
     VCR.use_cassette('shroud') do
-      @shroud = subject.players('pc-na', 'shroud').players.first
+      @shroud = subject.players('pc-na', 'shroud').first
     end
   end
 
   describe '#players' do  
     it 'gets the correct players' do
       VCR.use_cassette('shroud_Wadu') do
-        players = subject.players('pc-na', 'shroud,Wadu').players
+        players = subject.players('pc-na', 'shroud,Wadu')
         expect(players[0].name).to eq 'shroud'
         expect(players[1].name).to eq 'Wadu'
         expect(players.length).to eq 2
