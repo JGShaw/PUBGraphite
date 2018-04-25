@@ -31,8 +31,8 @@ class MetricExtractor
     metrics << match_metric(participant, 'longest_kill', participant.longest_kill, time)
     metrics << match_metric(participant, 'number_of_teams', last_match.rosters.length, time)
     
-    player_roster = last_match.rosters.find { |roster| roster.participants.member?(participant) }
-    metrics << match_metric(participant, 'rank', player_roster.rank, time)
+    roster = last_match.rosters.find { |roster| roster.participants.member?(participant) }
+    metrics << match_metric(participant, 'rank', roster.rank, time)
     
     metrics << match_metric(participant, 'revives', participant.revives, time)
     metrics << match_metric(participant, 'ride_distance', participant.ride_distance, time)
