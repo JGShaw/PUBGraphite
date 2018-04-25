@@ -49,76 +49,82 @@ describe MetricExtractor do
       end
     end
 
-    context 'a new match has been played and gives the metric' do
+    context 'a new match has been played' do
       before do
         subject.latest_matches = { @shroud => @second_match.match_id }
         VCR.use_cassette('shroud_match_0') do
           @metrics = subject.extract('pc-na', @shroud)
         end
       end
-       
-      it 'assists' do
-          expect(@metrics).to include('PUBG.shroud.matches.assists 0 1524544931')
-      end
-      
-      it 'boosts' do
-          expect(@metrics).to include('PUBG.shroud.matches.boosts 0 1524544931')
-      end
-      
-      it 'damage_dealt' do
-          expect(@metrics).to include('PUBG.shroud.matches.damage_dealt 500 1524544931')
-      end
-      
-      it 'dbnos' do
-          expect(@metrics).to include('PUBG.shroud.matches.dbnos 3 1524544931')
-      end
-      
-      it 'headshot_kills' do
-          expect(@metrics).to include('PUBG.shroud.matches.headshot_kills 2 1524544931')
-      end
-      
-      it 'heals' do
-          expect(@metrics).to include('PUBG.shroud.matches.heals 0 1524544931')
-      end
-      
-      it 'kills' do
-          expect(@metrics).to include('PUBG.shroud.matches.kills 5 1524544931')
-      end
-      
-      it 'longest_kill' do
-          expect(@metrics).to include('PUBG.shroud.matches.longest_kill 33 1524544931')
-      end
-    
-      it 'number_of_teams' do
-          expect(@metrics).to include('PUBG.shroud.matches.number_of_teams 49 1524544931')
+
+      it 'the second call to extract return no metrics' do
+        expect(subject.extract('pc-na', @shroud)).to be_empty
       end
 
-      it 'rank' do
-          expect(@metrics).to include('PUBG.shroud.matches.rank 40 1524544931')
-      end
+      context 'and gives the metric' do 
+        it 'assists' do
+            expect(@metrics).to include('PUBG.shroud.matches.assists 0 1524544931')
+        end
+        
+        it 'boosts' do
+            expect(@metrics).to include('PUBG.shroud.matches.boosts 0 1524544931')
+        end
+        
+        it 'damage_dealt' do
+            expect(@metrics).to include('PUBG.shroud.matches.damage_dealt 500 1524544931')
+        end
+        
+        it 'dbnos' do
+            expect(@metrics).to include('PUBG.shroud.matches.dbnos 3 1524544931')
+        end
+        
+        it 'headshot_kills' do
+            expect(@metrics).to include('PUBG.shroud.matches.headshot_kills 2 1524544931')
+        end
+        
+        it 'heals' do
+            expect(@metrics).to include('PUBG.shroud.matches.heals 0 1524544931')
+        end
+        
+        it 'kills' do
+            expect(@metrics).to include('PUBG.shroud.matches.kills 5 1524544931')
+        end
+        
+        it 'longest_kill' do
+            expect(@metrics).to include('PUBG.shroud.matches.longest_kill 33 1524544931')
+        end
       
-      it 'revives' do
-          expect(@metrics).to include('PUBG.shroud.matches.revives 0 1524544931')
-      end
-      
-      it 'ride_distance' do
-          expect(@metrics).to include('PUBG.shroud.matches.ride_distance 0 1524544931')
-      end
-      
-      it 'road_kills' do
-          expect(@metrics).to include('PUBG.shroud.matches.road_kills 0 1524544931')
-      end
-      
-      it 'time_survived' do
-          expect(@metrics).to include('PUBG.shroud.matches.time_survived 159 1524544931')
-      end
-      
-      it 'vehicle_destroys' do
-          expect(@metrics).to include('PUBG.shroud.matches.vehicle_destroys 0 1524544931')
-      end
-      
-      it 'walk_distance' do
-        expect(@metrics).to include('PUBG.shroud.matches.walk_distance 89.03397 1524544931')
+        it 'number_of_teams' do
+            expect(@metrics).to include('PUBG.shroud.matches.number_of_teams 49 1524544931')
+        end
+
+        it 'rank' do
+            expect(@metrics).to include('PUBG.shroud.matches.rank 40 1524544931')
+        end
+        
+        it 'revives' do
+            expect(@metrics).to include('PUBG.shroud.matches.revives 0 1524544931')
+        end
+        
+        it 'ride_distance' do
+            expect(@metrics).to include('PUBG.shroud.matches.ride_distance 0 1524544931')
+        end
+        
+        it 'road_kills' do
+            expect(@metrics).to include('PUBG.shroud.matches.road_kills 0 1524544931')
+        end
+        
+        it 'time_survived' do
+            expect(@metrics).to include('PUBG.shroud.matches.time_survived 159 1524544931')
+        end
+        
+        it 'vehicle_destroys' do
+            expect(@metrics).to include('PUBG.shroud.matches.vehicle_destroys 0 1524544931')
+        end
+        
+        it 'walk_distance' do
+          expect(@metrics).to include('PUBG.shroud.matches.walk_distance 89.03397 1524544931')
+        end
       end
     end
   end
