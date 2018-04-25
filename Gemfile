@@ -7,5 +7,6 @@ gem 'rubg'
 
 # Testing
 gem 'rspec'
-gem 'rubocop'
 gem 'timecop'
+gem 'vcr'
+gem 'webmock'
