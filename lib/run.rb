@@ -9,12 +9,11 @@ shard = ARGV[3].dup
 player_names = ARGV[4].dup
 
 extractor = MetricExtractor.new(api_key)
-players = extractor.players(shard, player_names)
 
 loop do
-
   metrics = []
 
+  players = extractor.players(shard, player_names)
   players.each do |player|
     metrics.concat extractor.extract(shard, player)
   end
