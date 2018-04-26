@@ -14,9 +14,9 @@ class MetricExtractor
   end
 
   def extract(shard, player)
-    return [] if player.match_ids.first == latest_matches[player] 
+    return [] if player.match_ids.first == latest_matches[player.player_id] 
 
-    latest_matches[player] = player.match_ids.first
+    latest_matches[player.player_id] = player.match_ids.first
     last_match = match(shard, player, 0)
     
     time = Time.parse(last_match.created).to_i

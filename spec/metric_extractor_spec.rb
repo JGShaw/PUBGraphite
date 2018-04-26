@@ -41,7 +41,7 @@ describe MetricExtractor do
 
     context 'the latest match has not changed' do
       before do
-        subject.latest_matches = { @shroud => @first_match.match_id }
+        subject.latest_matches = { @shroud.player_id => @first_match.match_id }
       end
 
       it 'returns no metrics' do
@@ -51,7 +51,7 @@ describe MetricExtractor do
 
     context 'a new match has been played' do
       before do
-        subject.latest_matches = { @shroud => @second_match.match_id }
+        subject.latest_matches = { @shroud.player_id => @second_match.match_id }
         VCR.use_cassette('shroud_match_0') do
           @metrics = subject.extract('pc-na', @shroud)
         end
