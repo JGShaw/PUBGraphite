@@ -24,5 +24,5 @@ loop do
   end
   socket.close
 
-  sleep 120
+  sleep 60
 end
